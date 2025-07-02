@@ -1,0 +1,38 @@
+/* Glass Morphism Effects */
+.glass-card, .glass-header, .glass-footer {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* Special glass effects for admin panel */
+.admin-panel .glass-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Enhancements for dark mode support */
+@media (prefers-color-scheme: dark) {
+    .glass-card, .glass-header, .glass-footer {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: white;
+    }
+    
+    .glass-card:hover {
+        background: rgba(30, 41, 59, 0.85);
+    }
+    
+    .admin-panel .glass-container {
+        background: rgba(15, 23, 42, 0.95);
+    }
+}
