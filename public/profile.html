@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - CBL Dispatch</title>
+    <meta name="description" content="Manage your CBL Dispatch profile settings and personal information.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body class="profile-page">
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <span class="brand-text">CBL Dispatch</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders, tracking IDs...">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <img src="/placeholder.svg?height=40&width=40" alt="Profile" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="modern-sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/track.html" class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Track Orders</span>
+            </a>
+            <a href="/place-order.html" class="nav-item" id="chatNavItem">
+                <i class="fas fa-comments"></i>
+                <span>Place Order</span>
+                <span class="nav-badge" id="chatBadge" style="display: none;">0</span>
+            </a>
+            <a href="/profile.html" class="nav-item active">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+                        <br>
+            <br>
+            </a>
+            <br>
+            <br>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="profile-container">
+            <!-- Profile Header Section -->
+            <section class="profile-header-section">
+                <div class="profile-header-card">
+                    <div class="profile-avatar-section">
+                        <div class="avatar-container">
+                            <img src="/placeholder.svg?height=100&width=100" alt="Profile Picture" class="profile-avatar" id="profileAvatar">
+                            <button class="avatar-edit-btn" id="avatarEditBtn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profileName">Loading...</h2>
+                            <p id="profileEmail">Loading...</p>
+                            <span class="profile-badge">Verified Member</span>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="totalOrders">0</span>
+                            <span class="stat-label">Total Orders</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="deliveredOrders">0</span>
+                            <span class="stat-label">Delivered</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="memberSince">2024</span>
+                            <span class="stat-label">Member Since</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Settings -->
+            <section class="profile-settings">
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="personal">
+                        <i class="fas fa-user"></i>
+                        Personal Info
+                    </button>
+                    <button class="tab-btn" data-tab="security">
+                        <i class="fas fa-shield-alt"></i>
+                        Security
+                    </button>
+                    <button class="tab-btn" data-tab="preferences">
+                        <i class="fas fa-cog"></i>
+                        Preferences
+                    </button>
+                    <button class="tab-btn" data-tab="notifications">
+                        <i class="fas fa-bell"></i>
+                        Notifications
+                    </button>
+                </div>
+
+                <!-- Personal Info Tab -->
+                <div class="tab-content active" id="personal-tab">
+                    <div class="settings-card">
+                        <h3>Personal Information</h3>
+                        <form class="profile-form" id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <div class="input-group">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="firstName" name="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <div class="input-group">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="lastName" name="lastName" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <div class="input-group">
+                                    <i class="fas fa-globe"></i>
+                                    <select id="country" name="country" required>
+                                        <option value="">Select your country</option>
+                                        <option value="United States">United States</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="France">France</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="South Korea">South Korea</option>
+                                        <option value="China">China</option>
+                                        <option value="India">India</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="Egypt">Egypt</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div class="tab-content" id="security-tab">
+                    <div class="settings-card">
+                        <h3>Security Settings</h3>
+                        <div class="security-option">
+                            <div class="option-info">
+                                <h4>Change Password</h4>
+                                <p>Update your password to keep your account secure</p>
+                            </div>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </button>
+                        </div>
+                        <div class="security-option">
+                            <div class="option-info">
+                                <h4>Two-Factor Authentication</h4>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="security-option">
+                            <div class="option-info">
+                                <h4>Login Notifications</h4>
+                                <p>Get notified when someone logs into your account</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences Tab -->
+                <div class="tab-content" id="preferences-tab">
+                    <div class="settings-card">
+                        <h3>Preferences</h3>
+                        <div class="preference-option">
+                            <div class="option-info">
+                                <h4>Language</h4>
+                                <p>Choose your preferred language</p>
+                            </div>
+                            <select class="preference-select">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                            </select>
+                        </div>
+                        <div class="preference-option">
+                            <div class="option-info">
+                                <h4>Time Zone</h4>
+                                <p>Set your local time zone</p>
+                            </div>
+                            <select class="preference-select">
+                                <option value="UTC">UTC</option>
+                                <option value="EST">Eastern Time</option>
+                                <option value="PST">Pacific Time</option>
+                                <option value="GMT">Greenwich Mean Time</option>
+                            </select>
+                        </div>
+                        <div class="preference-option">
+                            <div class="option-info">
+                                <h4>Dark Mode</h4>
+                                <p>Switch to dark theme</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div class="tab-content" id="notifications-tab">
+                    <div class="settings-card">
+                        <h3>Notification Settings</h3>
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Email Notifications</h4>
+                                <p>Receive updates about your orders via email</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>SMS Notifications</h4>
+                                <p>Get text messages for important updates</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Push Notifications</h4>
+                                <p>Receive browser notifications</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Marketing Emails</h4>
+                                <p>Receive promotional offers and updates</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <div class="brand-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span class="brand-text">CBL Dispatch</span>
+                    </div>
+                    <p class="brand-description">
+                        Your trusted partner for global shipping and package tracking solutions.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 class="group-title">Services</h4>
+                        <a href="#" class="footer-link">Express Delivery</a>
+                        <a href="#" class="footer-link">International Shipping</a>
+                        <a href="#" class="footer-link">Package Tracking</a>
+                        <a href="#" class="footer-link">Bulk Orders</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Track Package</a>
+                        <a href="#" class="footer-link">Shipping Guide</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Company</h4>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        © 2024 CBL Dispatch. All rights reserved.
+                    </p>
+                    <div class="footer-badges">
+                        <div class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            SSL Secured
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-award"></i>
+                            ISO Certified
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Updating profile...</p>
+        </div>
+    </div>
+
+    <!-- Avatar Upload Input -->
+    <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+
+    <script src="/js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Package - CBL Dispatch</title>
+    <meta name="description" content="Track your packages in real-time with CBL Dispatch tracking system.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body class="tracking-page">
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <span class="brand-text">CBL Dispatch</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders, tracking IDs...">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <img src="/placeholder.svg?height=40&width=40" alt="Profile" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="modern-sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/track.html" class="nav-item active">
+                <i class="fas fa-search"></i>
+                <span>Track Orders</span>
+            </a>
+            <a href="/place-order.html" class="nav-item" id="chatNavItem">
+                <i class="fas fa-comments"></i>
+                <span>Place Order</span>
+                <span class="nav-badge" id="chatBadge" style="display: none;">0</span>
+            </a>
+            <a href="/profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+                        <br>
+            <br>
+            </a>
+            <br>
+            <br>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tracking-results">
+            <!-- Back Link -->
+            <div class="back-link">
+                <a href="/dashboard.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <h1 class="page-title">Package Tracking</h1>
+                        <p class="page-subtitle">Real-time tracking for your shipments</p>
+                    </div>
+                    <div class="header-right">
+                        <div class="tracking-status-indicator" id="trackingStatusIndicator">
+                            <div class="status-dot"></div>
+                            <span>Ready to Track</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Header -->
+            <div class="order-header">
+                <div class="order-title-section">
+                    <h2 class="order-title">Enter Tracking ID</h2>
+                    <p class="order-date">Track your package with real-time updates</p>
+                </div>
+                <div class="order-status">
+                    <div class="status-badge status-pending">
+                        <i class="fas fa-search"></i>
+                        <span>Search Package</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reason Container (Hidden by default) -->
+            <div class="reason-container" id="reasonContainer" style="display: none;">
+                <h3>Package Status Information</h3>
+                <p id="statusReason">Additional information about your package status will appear here.</p>
+            </div>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <div class="order-image">
+                    <img id="productImage" src="/map.png?height=350&width=400" alt="Package" />
+                </div>
+                <div class="order-info">
+                    <h3 id="productName">Enter tracking ID to view package details</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Tracking ID</span>
+                            <span class="info-value" id="trackingId">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Price</span>
+                            <span class="info-value" id="price">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Quantity</span>
+                            <span class="info-value" id="quantity">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Destination</span>
+                            <span class="info-value" id="destination">-</span>
+                        </div>
+                        <div class="info-item" id="timeShippedContainer" style="display: none;">
+                            <span class="info-label">Time Shipped</span>
+                            <span class="info-value" id="timeShipped">-</span>
+                        </div>
+                        <div class="info-item" id="dateShippedContainer" style="display: none;">
+                            <span class="info-label">Date Shipped</span>
+                            <span class="info-value" id="dateShipped">-</span>
+                        </div>
+                        <div class="info-item" id="expectedArrivalContainer" style="display: none;">
+                            <span class="info-label">Expected Arrival</span>
+                            <span class="info-value" id="expectedArrival">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Progress -->
+            <div class="tracking-progress">
+                <h3>Tracking Progress</h3>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span>Order Placed</span>
+                        <span>Processing</span>
+                        <span>Shipped</span>
+                        <span>Delivered</span>
+                    </div>
+                </div>
+                
+                <!-- Map Container -->
+                <div class="tracking-map">
+                    <h4>Package Location</h4>
+                    <div class="map-container">
+                        <div class="map">
+                            <div class="map-route"></div>
+                            <div class="map-pin" id="mapPin">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-labels">
+                        <span>Origin</span>
+                        <span id="destinationLabel">Destination</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Form -->
+            <div class="tracking-search-form">
+                <form id="trackingSearchForm">
+                    <div class="search-input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="trackingSearchInput" placeholder="Enter tracking ID (e.g., CBL123456789)" required>
+                        <button type="submit" class="search-submit-btn">
+                            <i class="fas fa-search"></i>
+                            Track Package
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <div class="brand-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span class="brand-text">CBL Dispatch</span>
+                    </div>
+                    <p class="brand-description">
+                        Your trusted partner for global shipping and package tracking solutions.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 class="group-title">Services</h4>
+                        <a href="#" class="footer-link">Express Delivery</a>
+                        <a href="#" class="footer-link">International Shipping</a>
+                        <a href="#" class="footer-link">Package Tracking</a>
+                        <a href="#" class="footer-link">Bulk Orders</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Track Package</a>
+                        <a href="#" class="footer-link">Shipping Guide</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Company</h4>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        © 2024 CBL Dispatch. All rights reserved.
+                    </p>
+                    <div class="footer-badges">
+                        <div class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            SSL Secured
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-award"></i>
+                            ISO Certified
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/tracking.js"></script>
+</body>
+</html>

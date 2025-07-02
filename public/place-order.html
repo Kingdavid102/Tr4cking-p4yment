@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place an Order - CBL Dispatch</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <span class="brand-text">CBL Dispatch</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders, tracking IDs...">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <img src="/placeholder.svg?height=40&width=40" alt="Profile" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="modern-sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/track.html" class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Track Orders</span>
+            </a>
+            <a href="/place-order.html" class="nav-item active">
+                <i class="fas fa-plus-circle"></i>
+                <span>Place an Order</span>
+            </a>
+            <a href="/profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            <!-- Back Navigation -->
+            <div class="back-link">
+                <a href="/dashboard.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <!-- Page Header -->
+            <div class="site-header">
+                <div class="header-content">
+                    <div>
+                        <h1 class="page-title">How to Place an Order</h1>
+                        <p class="page-subtitle">Follow these simple steps to get your goods shipped worldwide</p>
+                    </div>
+                    <div class="order-status-indicator ready">
+                        <span class="status-dot"></span>
+                        Ready to Order
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Steps -->
+            <div class="order-steps-container">
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">
+                            <i class="fas fa-comment"></i>
+                            <span>1</span>
+                        </div>
+                        <div class="step-content">
+                            <h3>Click the Message Button</h3>
+                            <p>Look for the message button at the bottom right corner of your screen. This will open our direct communication channel.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">
+                            <i class="fas fa-comments"></i>
+                            <span>2</span>
+                        </div>
+                        <div class="step-content">
+                            <h3>Access Message Chat List</h3>
+                            <p>You'll be taken to a message chat list where you can contact our support team directly for personalized assistance.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">
+                            <i class="fas fa-box"></i>
+                            <span>3</span>
+                        </div>
+                        <div class="step-content">
+                            <h3>Describe Your Goods</h3>
+                            <p>Provide detailed information about your products to our support team. Include dimensions, weight, and destination details.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">
+                            <i class="fas fa-clock"></i>
+                            <span>4</span>
+                        </div>
+                        <div class="step-content">
+                            <h3>Quick Booking Process</h3>
+                            <p>Your goods will be booked and processed in less than three hours. Our team works efficiently to get you started.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">
+                            <i class="fas fa-credit-card"></i>
+                            <span>5</span>
+                        </div>
+                        <div class="step-content">
+                            <h3>Payment & Tracking</h3>
+                            <p>After payment, you'll receive a tracking ID to track and follow up on your goods and services throughout the shipping process.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Ready to Get Started?</h2>
+                        <p>Click the message button below to begin your order process and connect with our support team.</p>
+                        <button class="cta-button" id="startOrderBtn">
+                            <i class="fas fa-comment"></i>
+                            Start Your Order Now
+                        </button>
+                    </div>
+                    <div class="cta-visual">
+                        <div class="floating-icons">
+                            <i class="fas fa-shipping-fast"></i>
+                            <i class="fas fa-globe"></i>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2>Why Choose CBL Dispatch?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Secure Shipping</h4>
+                        <p>Your packages are fully insured and handled with the highest security standards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Fast Processing</h4>
+                        <p>Orders are processed and booked within 3 hours of confirmation.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Worldwide Delivery</h4>
+                        <p>We ship to over 200 countries with reliable tracking and delivery.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>24/7 Support</h4>
+                        <p>Our support team is available around the clock to assist you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Message Button (Fixed Position) -->
+    <div class="message-button-container">
+        <button class="message-button" id="messageButton">
+            <i class="fas fa-comment"></i>
+            <span class="message-tooltip">Click here to start your order!</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <div class="brand-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span class="brand-text">CBL Dispatch</span>
+                    </div>
+                    <p class="brand-description">
+                        Your trusted partner for global shipping and package tracking solutions.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 class="group-title">Services</h4>
+                        <a href="#" class="footer-link">Express Delivery</a>
+                        <a href="#" class="footer-link">International Shipping</a>
+                        <a href="#" class="footer-link">Package Tracking</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Track Package</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2024 CBL Dispatch. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Begin of Chaport Live Chat code --> <script type="text/javascript"> (function(w,d,v3){ w.chaportConfig = { appId : '68657a2e62e7153d1531a297' };  if(w.chaport)return;v3=w.chaport={};v3._q=[];v3._l={};v3.q=function(){v3._q.push(arguments)};v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://app.chaport.com/javascripts/insert.js';var ss=d.getElementsByTagName('script')[0];ss.parentNode.insertBefore(s,ss)})(window, document); </script> <!-- End of Chaport Live Chat code -->
+
+    <style>
+        .order-steps-container {
+            margin: 3rem 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number i {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .step-number span {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content h3 {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-content p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            margin: 4rem 0;
+        }
+
+        .cta-card {
+            background: var(--gradient-primary);
+            border-radius: var(--radius-2xl);
+            padding: 3rem;
+            color: white;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-content h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .floating-icons i {
+            font-size: 2rem;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-icons i:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .floating-icons i:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .features-section {
+            margin: 4rem 0;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .feature-item h4 {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: var(--gray-600);
+            font-size: var(--font-size-sm);
+            line-height: 1.6;
+        }
+
+        .message-button-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .message-button {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .message-button:hover {
+            transform: scale(1.1);
+        }
+
+        .message-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--gray-900);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .message-button:hover .message-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .cta-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .message-button-container {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize page
+            initializePage();
+
+            function initializePage() {
+                // Setup hamburger menu
+                const hamburgerMenu = document.getElementById('hamburgerMenu');
+                const sidebar = document.getElementById('sidebar');
+
+                if (hamburgerMenu && sidebar) {
+                    hamburgerMenu.addEventListener('click', () => {
+                        hamburgerMenu.classList.toggle('active');
+                        sidebar.classList.toggle('active');
+                    });
+
+                    // Close sidebar when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!sidebar.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+                            hamburgerMenu.classList.remove('active');
+                            sidebar.classList.remove('active');
+                        }
+                    });
+                }
+
+                // Setup logout
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+
+                // Setup message buttons
+                const messageButton = document.getElementById('messageButton');
+                const startOrderBtn = document.getElementById('startOrderBtn');
+
+                if (messageButton) {
+                    messageButton.addEventListener('click', startOrder);
+                }
+
+                if (startOrderBtn) {
+                    startOrderBtn.addEventListener('click', startOrder);
+                }
+
+                // Update user info
+                updateUserInfo();
+            }
+
+            function startOrder() {
+                // Redirect to chat or contact page
+                window.location.href = '/chat.html';
+            }
+
+            function updateUserInfo() {
+                const user = JSON.parse(localStorage.getItem('user') || '{}');
+                const userName = document.getElementById('userName');
+                const userAvatar = document.getElementById('userAvatar');
+
+                if (userName && user.firstName) {
+                    userName.textContent = `${user.firstName} ${user.lastName}`;
+                }
+
+                if (userAvatar && user.avatar) {
+                    userAvatar.src = user.avatar;
+                    userAvatar.onerror = () => {
+                        userAvatar.src = '/placeholder.svg?height=40&width=40';
+                    };
+                }
+            }
+
+            function logout() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '/login.html';
+            }
+
+            console.log('📦 CBL Dispatch Place Order Page Loaded Successfully!');
+        });
+    </script>
+</body>
+</html>

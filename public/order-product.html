@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Product - CBL Dispatch</title>
+    <meta name="description" content="Place your order with CBL Dispatch for worldwide shipping.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body class="order-page">
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <span class="brand-text">CBL Dispatch</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders, tracking IDs...">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <img src="/placeholder.svg?height=40&width=40" alt="Profile" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="modern-sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/track.html" class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Track Orders</span>
+            </a>
+            <a href="/order-product.html" class="nav-item active">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Order Product</span>
+            </a>
+            <a href="/profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="order-container">
+            <div class="order-header">
+                <div class="header-content">
+                    <div class="page-info">
+                        <h1 class="page-title">Order Product</h1>
+                        <p class="page-subtitle">Place your order with our support team</p>
+                    </div>
+                    <div class="back-action">
+                        <a href="/dashboard.html" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-content">
+                <div class="order-info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="info-content">
+                        <h2>Need to Place an Order?</h2>
+                        <p>Our dedicated support team is here to help you place your order quickly and securely. Simply click the message button at the bottom right corner of your screen to start a conversation with one of our support representatives.</p>
+                        
+                        <div class="process-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Contact Support</h4>
+                                    <p>Click the chat button to connect with our support team</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Provide Details</h4>
+                                    <p>Share your product and shipping information with our team</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Complete Payment</h4>
+                                    <p>Make secure payment through our verified payment methods</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Get Tracking ID</h4>
+                                    <p>Receive your unique tracking ID to monitor your shipment</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4>Secure Processing</h4>
+                                <p>All orders are processed securely with end-to-end encryption</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h4>Quick Response</h4>
+                                <p>Our support team responds within minutes during business hours</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h4>Worldwide Shipping</h4>
+                                <p>We ship to over 200+ countries and territories worldwide</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tracking"></i>
+                                </div>
+                                <h4>Real-time Tracking</h4>
+                                <p>Track your package in real-time from pickup to delivery</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info">
+                            <h3>Alternative Contact Methods</h3>
+                            <div class="contact-methods">
+                                <div class="contact-method">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <strong>Email Support</strong>
+                                        <p>support@cbldispatch.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-method">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <strong>Phone Support</strong>
+                                        <p>+1 (555) 123-4567</p>
+                                    </div>
+                                </div>
+                                <div class="contact-method">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <strong>Business Hours</strong>
+                                        <p>Mon-Fri: 9AM-6PM EST</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <div class="brand-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span class="brand-text">CBL Dispatch</span>
+                    </div>
+                    <p class="brand-description">
+                        Your trusted partner for global shipping and package tracking solutions.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 class="group-title">Services</h4>
+                        <a href="#" class="footer-link">Express Delivery</a>
+                        <a href="#" class="footer-link">International Shipping</a>
+                        <a href="#" class="footer-link">Package Tracking</a>
+                        <a href="#" class="footer-link">Bulk Orders</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Track Package</a>
+                        <a href="#" class="footer-link">Shipping Guide</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="group-title">Company</h4>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        © 2024 CBL Dispatch. All rights reserved.
+                    </p>
+                    <div class="footer-badges">
+                        <div class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            SSL Secured
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-award"></i>
+                            ISO Certified
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/order-product.js"></script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - CBL Tracking Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        .add-product-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-product-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .add-product-header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-product-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray-500);
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .conditional-fields {
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .conditional-fields.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+
+        .file-upload {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            border: 2px dashed var(--gray-300);
+            border-radius: 12px;
+            background: var(--gray-50);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .file-upload input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-content {
+            text-align: center;
+            color: var(--gray-500);
+        }
+
+        .file-upload-content i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .success-message h2 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .tracking-id {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .add-product-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .step-indicator {
+                gap: 0.5rem;
+            }
+
+            .step {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="add-product-container">
+        <div class="add-product-header">
+            <h1><i class="fas fa-plus-circle"></i> Add New Product</h1>
+            <p>Create a new shipping order with tracking information</p>
+        </div>
+
+        <div class="step-indicator">
+            <div class="step active" data-step="1">1</div>
+            <div class="step" data-step="2">2</div>
+            <div class="step" data-step="3">3</div>
+        </div>
+
+        <form id="addProductForm" enctype="multipart/form-data">
+            <!-- Step 1: Basic Information -->
+            <div class="form-step active" data-step="1">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">
+                    <i class="fas fa-box"></i> Product Information
+                </h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="productName">Product Name *</label>
+                        <input type="text" id="productName" name="productName" required placeholder="Enter product name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="price">Price ($) *</label>
+                        <input type="number" id="price" name="price" step="0.01" min="0" required placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity *</label>
+                        <input type="number" id="quantity" name="quantity" min="1" required placeholder="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination">Destination *</label>
+                        <input type="text" id="destination" name="destination" required placeholder="Destination address">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Status & Details -->
+            <div class="form-step" data-step="2">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">
+                    <i class="fas fa-info-circle"></i> Status & Details
+                </h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="status">Order Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="">Select status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Hold">Hold</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="In Transit">In Transit</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group conditional-fields" id="reasonField">
+                        <label for="reason">Reason/Note</label>
+                        <textarea id="reason" name="reason" placeholder="Enter reason for hold/pending status or additional notes"></textarea>
+                    </div>
+
+                    <div class="form-group conditional-fields" id="dateShippedField">
+                        <label for="dateShipped">Date Shipped</label>
+                        <input type="date" id="dateShipped" name="dateShipped">
+                    </div>
+
+                    <div class="form-group conditional-fields" id="timeShippedField">
+                        <label for="timeShipped">Time Shipped</label>
+                        <input type="time" id="timeShipped" name="timeShipped">
+                    </div>
+
+                    <div class="form-group conditional-fields" id="expectedArrivalField">
+                        <label for="expectedArrival">Expected Arrival</label>
+                        <input type="datetime-local" id="expectedArrival" name="expectedArrival">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Customer & Image -->
+            <div class="form-step" data-step="3">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">
+                    <i class="fas fa-user"></i> Customer Information & Image
+                </h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName" name="customerName" placeholder="Customer full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">Customer Email</label>
+                        <input type="email" id="customerEmail" name="customerEmail" placeholder="customer@email.com">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="image">Product Image</label>
+                        <div class="file-upload">
+                            <input type="file" id="image" name="image" accept="image/*">
+                            <div class="file-upload-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload product image</p>
+                                <small>PNG, JPG, GIF up to 5MB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="form-step" data-step="success" style="display: none;">
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h2>Product Added Successfully!</h2>
+                    <p>Your product has been created with the following tracking ID:</p>
+                    <div class="tracking-id" id="generatedTrackingId"></div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/admin.html'">
+                            <i class="fas fa-arrow-left"></i> Back to Admin
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="resetForm()">
+                            <i class="fas fa-plus"></i> Add Another Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Navigation -->
+            <div class="form-actions" id="formNavigation">
+                <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+                <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                    <i class="fas fa-save"></i> Create Product
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || !user.isAdmin) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            // Initialize form
+            updateConditionalFields();
+        });
+
+        // Status change handler
+        document.getElementById('status').addEventListener('change', updateConditionalFields);
+
+        function updateConditionalFields() {
+            const status = document.getElementById('status').value;
+            const reasonField = document.getElementById('reasonField');
+            const dateShippedField = document.getElementById('dateShippedField');
+            const timeShippedField = document.getElementById('timeShippedField');
+            const expectedArrivalField = document.getElementById('expectedArrivalField');
+
+            // Hide all conditional fields first
+            reasonField.classList.remove('show');
+            dateShippedField.classList.remove('show');
+            timeShippedField.classList.remove('show');
+            expectedArrivalField.classList.remove('show');
+
+            // Show relevant fields based on status
+            if (status === 'Hold' || status === 'Pending' || status === 'Cancelled') {
+                reasonField.classList.add('show');
+            }
+
+            if (status === 'Shipped' || status === 'In Transit' || status === 'Out for Delivery' || status === 'Delivered') {
+                dateShippedField.classList.add('show');
+                timeShippedField.classList.add('show');
+                expectedArrivalField.classList.add('show');
+            }
+        }
+
+        function changeStep(direction) {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            const currentStepIndicator = document.querySelector(`.step[data-step="${currentStep}"]`);
+
+            if (direction === 1) {
+                // Validate current step before proceeding
+                if (!validateCurrentStep()) {
+                    return;
+                }
+
+                // Mark current step as completed
+                currentStepIndicator.classList.add('completed');
+                currentStepIndicator.classList.remove('active');
+            }
+
+            // Hide current step
+            currentStepElement.classList.remove('active');
+
+            // Update step number
+            currentStep += direction;
+
+            // Show new step
+            const newStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            const newStepIndicator = document.querySelector(`.step[data-step="${currentStep}"]`);
+
+            newStepElement.classList.add('active');
+            newStepIndicator.classList.add('active');
+
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            prevBtn.style.display = currentStep > 1 ? 'flex' : 'none';
+            nextBtn.style.display = currentStep < totalSteps ? 'flex' : 'none';
+            submitBtn.style.display = currentStep === totalSteps ? 'flex' : 'none';
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            const requiredFields = currentStepElement.querySelectorAll('input[required], select[required]');
+
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    showNotification(`Please fill in the ${field.previousElementSibling.textContent}`, 'error');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Form submission
+        document.getElementById('addProductForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(this);
+                const token = localStorage.getItem('token');
+
+                const response = await fetch('/admin/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Show success step
+                    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+                    document.querySelector('.form-step[data-step="success"]').style.display = 'block';
+                    document.getElementById('formNavigation').style.display = 'none';
+                    document.getElementById('generatedTrackingId').textContent = result.trackingId;
+
+                    showNotification('Product created successfully!', 'success');
+                } else {
+                    showNotification(result.error || 'Failed to create product', 'error');
+                }
+            } catch (error) {
+                console.error('Error creating product:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('addProductForm').reset();
+            currentStep = 1;
+            
+            // Reset all steps
+            document.querySelectorAll('.form-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.querySelector('.form-step[data-step="1"]').classList.add('active');
+            document.querySelector('.form-step[data-step="success"]').style.display = 'none';
+
+            // Reset step indicators
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            document.querySelector('.step[data-step="1"]').classList.add('active');
+
+            // Reset navigation
+            document.getElementById('formNavigation').style.display = 'flex';
+            updateNavigationButtons();
+            updateConditionalFields();
+        }
+
+        // File upload preview
+        document.getElementById('image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const uploadContent = document.querySelector('.file-upload-content');
+
+            if (file) {
+                uploadContent.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                    <p style="color: var(--success);">File selected: ${file.name}</p>
+                    <small>Click to change</small>
+                `;
+            }
+        });
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(n => n.remove());
+
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${getNotificationIcon(type)}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${getNotificationColor(type)};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 400px;
+            `;
+
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Auto remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        function getNotificationIcon(type) {
+            switch (type) {
+                case 'success': return 'fa-check-circle';
+                case 'error': return 'fa-exclamation-circle';
+                case 'warning': return 'fa-exclamation-triangle';
+                default: return 'fa-info-circle';
+            }
+        }
+
+        function getNotificationColor(type) {
+            switch (type) {
+                case 'success': return '#10b981';
+                case 'error': return '#ef4444';
+                case 'warning': return '#f59e0b';
+                default: return '#3b82f6';
+            }
+        }
+    </script>
+</body>
+</html>
